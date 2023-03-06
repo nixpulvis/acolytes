@@ -124,3 +124,33 @@ pub fn receiver(c: Chan<(), <OT as Dual>::Dual>) {
     // We're done!
     println!("Bob got: {}", mb);
 }
+
+#[cfg(test)]
+mod tests {
+    use std::marker::PhantomData;
+    use std::thread;
+    use std::time::Duration;
+    use channels::Channel;
+    use super::*;
+
+    // TODO: Pull out the `read_choice(s)` logic to main.
+    #[ignore]
+    #[test]
+    fn oblivious_transfer() {
+        let addr = "127.0.0.1:2200";
+
+
+        thread::spawn(move || {
+            let c = Channel::accept_from_socket_addr(addr).unwrap();
+            let ch = Chan(c, PhantomData);
+            receiver(ch);
+        });
+        thread::sleep(Duration::from_millis(10));
+        thread::spawn(move || {
+            let identity = "nixpulvis".to_string();
+            let c = Channel::connect_to_socket_addr(identity, addr).unwrap();
+            let ch = Chan(c, PhantomData);
+            sender(ch);
+        }).join().unwrap();
+    }
+}
