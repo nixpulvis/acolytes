@@ -21,8 +21,5 @@ To see a trace of the program execution, run the examples with
 ### Testing
 
 ```sh
-# Test the session-types crate
-cargo test -- --test-threads=1
-# Test the underlying channels crate
-cargo test -p channels -- --test-threads=1
+cargo test --all -- --test-threads=1
 ```
