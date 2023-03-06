@@ -1,0 +1,11 @@
+[package]
+name = "channels"
+version = "0.0.2"
+authors = ["Nathan Lilienthal <nathan@nixpulvis.com>"]
+edition = "2018"
+
+[dependencies]
+time = "*"
+bincode = "*"
+serde = { version = "*" }
+log = "*"
