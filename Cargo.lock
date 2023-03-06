@@ -3,6 +3,21 @@
 version = 3
 
 [[package]]
+name = "acolytes"
+version = "0.0.1"
+dependencies = [
+ "channels",
+ "docopt",
+ "env_logger",
+ "log",
+ "num",
+ "openssl",
+ "rand",
+ "serde",
+ "session-types",
+]
+
+[[package]]
 name = "aho-corasick"
 version = "0.7.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -435,12 +450,7 @@ name = "session-types"
 version = "0.0.2"
 dependencies = [
  "channels",
- "docopt",
- "env_logger",
  "log",
- "num",
- "openssl",
- "rand",
  "serde",
 ]
 

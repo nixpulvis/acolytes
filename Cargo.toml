@@ -1,11 +1,18 @@
 [package]
-name = "session-types"
-version = "0.0.2"
+name = "acolytes"
+version = "0.0.1"
 authors = ["Nathan Lilienthal <nathan@nixpulvis.com>"]
 edition = "2018"
 
+[workspace]
+members = [
+    "channels",
+    "session-types",
+]
+
 [dependencies]
 serde = "*"
+session-types = { path = "./session-types" }
 channels = { path = "./channels" }
 log = "*"
 
