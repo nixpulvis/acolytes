@@ -7,12 +7,7 @@ name = "acolytes"
 version = "0.0.1"
 dependencies = [
  "channels",
- "docopt",
- "env_logger",
  "log",
- "num",
- "openssl",
- "rand",
  "serde",
  "session-types",
 ]
@@ -332,6 +327,19 @@ dependencies = [
  "libc",
  "pkg-config",
  "vcpkg",
+]
+
+[[package]]
+name = "ot"
+version = "0.0.2"
+dependencies = [
+ "channels",
+ "docopt",
+ "env_logger",
+ "num",
+ "openssl",
+ "rand",
+ "session-types",
 ]
 
 [[package]]

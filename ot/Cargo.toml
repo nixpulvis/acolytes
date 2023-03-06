@@ -1,0 +1,14 @@
+[package]
+name = "ot"
+version = "0.0.2"
+authors = ["Nathan Lilienthal <nathan@nixpulvis.com>"]
+edition = "2018"
+
+[dependencies]
+docopt = "*"
+env_logger = "*"
+num = { version = "*", features = ["rand", "serde"] }
+openssl = "*"
+rand = "*"
+session-types = { path = "../session-types" }
+channels = { path = "../channels" }

@@ -8,6 +8,7 @@ edition = "2018"
 members = [
     "channels",
     "session-types",
+    "ot",
 ]
 
 [dependencies]
@@ -15,11 +16,3 @@ serde = "*"
 session-types = { path = "./session-types" }
 channels = { path = "./channels" }
 log = "*"
-
-[dev-dependencies]
-num = { version = "*", features = ["rand", "serde"] }
-# num-bigint = "*"
-openssl = "*"
-rand = "*"
-docopt = "*"
-env_logger = "*"
