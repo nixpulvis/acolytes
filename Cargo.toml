@@ -8,3 +8,11 @@ edition = "2018"
 serde = "*"
 channels = { path = "./channels" }
 log = "*"
+
+[dev-dependencies]
+num = { version = "*", features = ["rand", "serde"] }
+# num-bigint = "*"
+openssl = "*"
+rand = "*"
+docopt = "*"
+env_logger = "*"
