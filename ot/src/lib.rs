@@ -56,7 +56,8 @@ pub fn sender(m: (BigInt, BigInt), c: Chan<(), OT>) {
 
 // OT's complement protocol for the receiver (Bob).
 pub fn receiver<C>(chooser: C, c: Chan<(), <OT as Dual>::Dual>)
-where C: Fn((&BigInt, &BigInt), (&BigInt, &BigInt)) -> Choice
+    -> BigInt
+    where C: Fn((&BigInt, &BigInt), (&BigInt, &BigInt)) -> Choice
 {
     // Bob waits for the OT sender...
     let (c, ((n, e), (x0, x1))) = c.recv();
@@ -74,9 +75,7 @@ where C: Fn((&BigInt, &BigInt), (&BigInt, &BigInt)) -> Choice
     // is able to compute exactly one of the messages mb.
     let mb = match b { Left => (m0 - k) % &n, Right => (m1 - k) % &n };
     c.close();
-
-    // We're done!
-    println!("Bob got: {}", mb);
+    return mb;
 }
 
 #[cfg(test)]
@@ -87,24 +86,23 @@ mod tests {
     use channels::Channel;
     use super::*;
 
-    // TODO: Pull out the `read_choice(s)` logic to main.
-    #[ignore]
     #[test]
     fn oblivious_transfer() {
         let addr = "127.0.0.1:2200";
 
-
         thread::spawn(move || {
             let c = Channel::accept_from_socket_addr(addr).unwrap();
             let ch = Chan(c, PhantomData);
-            receiver(|_,_| { Choice::Left }, ch);
+            let mb = receiver(|_,_| { Choice::Left }, ch);
+            assert_eq!(mb, BigInt::from(11357));
+            assert!(false); // TODO: Why isn't this hit?
         });
         thread::sleep(Duration::from_millis(10));
         thread::spawn(move || {
             let identity = "nixpulvis".to_string();
             let c = Channel::connect_to_socket_addr(identity, addr).unwrap();
             let ch = Chan(c, PhantomData);
-            sender((BigInt::from(1), BigInt::from(2)), ch);
+            sender((BigInt::from(1357), BigInt::from(51687)), ch);
         }).join().unwrap();
     }
 }

@@ -33,7 +33,8 @@ fn main() {
     } else if args.get_bool("--receiver") {
         let c = Channel::accept_from_socket_addr(addr).unwrap();
         let ch = Chan(c, PhantomData);
-        receiver(|_,_| read_choice(), ch);
+        let mb = receiver(|_,_| read_choice(), ch);
+        println!("Bob got: {}", mb);
     }
 }
 
